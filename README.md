@@ -61,3 +61,28 @@ No frameworks. Just lightweight web technology.
 ---
 
 # 📂 Project Structure
+
+
+---
+
+# 🌍 Purpose
+
+This project was created to help people in the UK safely enjoy the historic solar eclipse happening on:
+
+**12 August 2026**
+
+Remember:
+
+⚠️ Never look directly at the Sun without proper solar protection.
+
+Only use certified solar viewing equipment.
+
+---
+
+# 📜 License
+
+Created for educational and informational purposes.
+
+---
+
+Made with 🌘 by James
