@@ -1,0 +1,718 @@
+/* =========================================
+   SOLAR ECLIPSE GUIDE UK 2026
+   MAIN STYLE.CSS
+========================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(circle at top, #1b2750, #050505 60%);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+
+/* =========================================
+   APP
+========================================= */
+
+.app {
+  min-height: 100vh;
+  padding-bottom: 90px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================================
+   LOADING SCREEN
+========================================= */
+
+.loading-screen {
+
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle, #172348, #020202);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  z-index:9999;
+
+}
+
+
+.eclipse-anim-wrap {
+
+  width:220px;
+  height:220px;
+
+  position:relative;
+
+}
+
+
+.sun-body {
+
+  position:absolute;
+
+  width:130px;
+  height:130px;
+
+  background:#ffb000;
+
+  border-radius:50%;
+
+  top:45px;
+  left:45px;
+
+  box-shadow:
+    0 0 40px #ff9900,
+    0 0 80px #ff6600;
+
+  overflow:hidden;
+
+}
+
+
+.moon-slide {
+
+  position:absolute;
+
+  width:130px;
+  height:130px;
+
+  background:#050505;
+
+  border-radius:50%;
+
+  animation:eclipseMove 2.5s infinite;
+
+}
+
+
+@keyframes eclipseMove {
+
+0% {
+ transform:translateX(-140px);
+}
+
+50% {
+ transform:translateX(0);
+}
+
+100% {
+ transform:translateX(140px);
+}
+
+}
+
+
+
+.corona-ring {
+
+position:absolute;
+
+border-radius:50%;
+border:3px solid rgba(255,200,80,.5);
+
+}
+
+
+.corona-ring-1 {
+width:170px;
+height:170px;
+left:25px;
+top:25px;
+}
+
+.corona-ring-2 {
+width:200px;
+height:200px;
+left:10px;
+top:10px;
+}
+
+.corona-ring-3 {
+width:230px;
+height:230px;
+left:-5px;
+top:-5px;
+}
+
+
+.loading-text {
+
+margin-top:40px;
+font-size:18px;
+opacity:.8;
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+
+.app-header {
+
+position:sticky;
+top:0;
+
+z-index:50;
+
+background:
+rgba(10,10,20,.75);
+
+backdrop-filter:blur(20px);
+
+border-bottom:
+1px solid rgba(255,255,255,.1);
+
+}
+
+
+.header-inner {
+
+height:70px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+gap:12px;
+
+}
+
+
+.header-icon {
+
+font-size:28px;
+
+}
+
+
+.header-title {
+
+font-size:22px;
+font-weight:700;
+
+}
+
+
+.header-date {
+
+font-size:13px;
+opacity:.6;
+
+}
+
+
+
+/* =========================================
+   PAGES
+========================================= */
+
+
+.page-container {
+
+padding:20px;
+
+}
+
+
+.page {
+
+display:none;
+
+animation:fade .35s ease;
+
+}
+
+
+.page.active {
+
+display:block;
+
+}
+
+
+@keyframes fade {
+
+from {
+opacity:0;
+transform:translateY(15px);
+}
+
+to {
+opacity:1;
+transform:none;
+}
+
+}
+
+
+
+.page-title {
+
+font-size:30px;
+margin-bottom:15px;
+
+}
+
+
+.page-subtitle {
+
+opacity:.7;
+margin-bottom:20px;
+
+}
+
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+
+.card {
+
+background:
+
+rgba(255,255,255,.08);
+
+
+border:
+
+1px solid rgba(255,255,255,.12);
+
+
+border-radius:24px;
+
+
+padding:20px;
+
+
+margin-bottom:20px;
+
+
+backdrop-filter:blur(20px);
+
+
+box-shadow:
+0 20px 40px rgba(0,0,0,.25);
+
+}
+
+
+
+.card-title {
+
+font-size:20px;
+margin-bottom:12px;
+
+}
+
+
+.card-body {
+
+line-height:1.6;
+opacity:.85;
+
+}
+
+
+
+/* =========================================
+   HERO
+========================================= */
+
+
+.hero {
+
+text-align:center;
+padding:30px 0;
+
+}
+
+
+.hero-title {
+
+font-size:34px;
+
+margin-top:20px;
+
+}
+
+
+.hero-subtitle {
+
+opacity:.7;
+
+margin-top:10px;
+
+}
+
+
+
+.hero-eclipse-mini {
+
+display:flex;
+justify-content:center;
+
+}
+
+
+.hero-sun {
+
+width:120px;
+height:120px;
+
+background:#ffae00;
+
+border-radius:50%;
+
+box-shadow:
+0 0 50px #ff8800;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+
+.hero-moon {
+
+position:absolute;
+
+width:120px;
+height:120px;
+
+background:#050505;
+
+border-radius:50%;
+
+right:25px;
+
+}
+
+
+
+/* =========================================
+   COUNTDOWN
+========================================= */
+
+
+.countdown-grid {
+
+display:flex;
+
+justify-content:center;
+
+gap:8px;
+
+margin:20px 0;
+
+}
+
+
+.countdown-num {
+
+font-size:30px;
+font-weight:800;
+
+display:block;
+
+}
+
+
+.countdown-label {
+
+font-size:12px;
+opacity:.6;
+
+}
+
+
+.countdown-unit {
+
+text-align:center;
+
+}
+
+
+.countdown-sep {
+
+font-size:30px;
+
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+
+.btn {
+
+display:inline-block;
+
+padding:14px 22px;
+
+border-radius:18px;
+
+border:none;
+
+text-decoration:none;
+
+color:white;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+
+
+.btn-primary {
+
+background:
+linear-gradient(135deg,#ff9d00,#ff4d00);
+
+}
+
+
+
+.btn-outline {
+
+background:
+rgba(255,255,255,.1);
+
+border:
+1px solid rgba(255,255,255,.2);
+
+}
+
+
+
+/* =========================================
+   QUICK GRID
+========================================= */
+
+
+.quick-grid {
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:15px;
+
+}
+
+
+.quick-card {
+
+background:
+rgba(255,255,255,.08);
+
+border:
+1px solid rgba(255,255,255,.12);
+
+border-radius:22px;
+
+padding:20px;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+
+.qc-icon {
+
+font-size:30px;
+
+display:block;
+
+margin-bottom:10px;
+
+}
+
+
+
+/* =========================================
+   SHOP
+========================================= */
+
+
+#page-shop ul {
+
+margin:15px 0 20px 20px;
+
+line-height:1.8;
+
+}
+
+
+#page-shop h3 {
+
+font-size:24px;
+
+}
+
+
+
+/* =========================================
+   BOTTOM NAV
+========================================= */
+
+
+.bottom-nav {
+
+position:fixed;
+
+bottom:15px;
+
+left:15px;
+right:15px;
+
+height:75px;
+
+background:
+rgba(20,20,30,.8);
+
+backdrop-filter:blur(25px);
+
+
+border:
+
+1px solid rgba(255,255,255,.15);
+
+
+border-radius:30px;
+
+
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+
+z-index:100;
+
+
+}
+
+
+
+.nav-btn {
+
+background:none;
+
+border:none;
+
+color:white;
+
+opacity:.6;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+font-size:12px;
+
+}
+
+
+
+.nav-btn.active {
+
+opacity:1;
+
+}
+
+
+
+.nav-icon {
+
+font-size:25px;
+
+}
+
+
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+
+.settings-group {
+
+margin-bottom:25px;
+
+}
+
+
+.settings-row {
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:18px 0;
+
+}
+
+
+
+.toggle input {
+
+width:45px;
+height:25px;
+
+}
+
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+
+@media(min-width:700px){
+
+.page-container{
+
+max-width:700px;
+
+margin:auto;
+
+}
+
+}
