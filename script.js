@@ -1,458 +1,51 @@
-/* =========================================
-   SOLAR ECLIPSE GUIDE UK 2026
-   SCRIPT.JS
-========================================= */
+// TIMES (edit these to real eclipse times)
+const startTime = new Date("Aug 12, 2026 10:00:00").getTime();
+const maxTime = new Date("Aug 12, 2026 11:00:00").getTime();
+const endTime = new Date("Aug 12, 2026 12:00:00").getTime();
 
+// Countdown
+setInterval(() => {
+  const now = new Date().getTime();
 
-/* =========================================
-   LOADING SCREEN
-========================================= */
+  const update = (id, time) => {
+    const diff = time - now;
+    if (diff <= 0) return document.getElementById(id)?.innerHTML = "Now";
 
-window.addEventListener("load", () => {
+    const m = Math.floor((diff / 1000 / 60) % 60);
+    const s = Math.floor((diff / 1000) % 60);
 
-    const loader = document.getElementById("loading-screen");
-    const app = document.getElementById("app");
+    document.getElementById(id)?.innerHTML = `${m}m ${s}s`;
+  };
 
-    setTimeout(() => {
+  update("start", startTime);
+  update("max", maxTime);
+  update("end", endTime);
 
-        if(loader){
-            loader.style.opacity = "0";
-            loader.style.transition = "opacity .5s";
-        }
+  // STATUS
+  let status = "Waiting...";
+  if (now >= startTime) status = "Eclipse Started 🌘";
+  if (now >= maxTime) status = "Greatest Eclipse 🌕";
+  if (now >= endTime) status = "Eclipse Ended";
 
-        setTimeout(()=>{
+  const statusEl = document.getElementById("status");
+  if (statusEl) statusEl.innerText = status;
 
-            if(loader)
-                loader.style.display="none";
+}, 1000);
 
-            if(app)
-                app.classList.remove("hidden");
-
-        },500);
-
-
-    },2500);
-
-});
-
-
-
-/* =========================================
-   PAGE NAVIGATION
-========================================= */
-
-
-function navigateTo(page){
-
-    document.querySelectorAll(".page")
-    .forEach(p=>{
-        p.classList.remove("active");
-    });
-
-
-    const target =
-    document.getElementById(
-        "page-" + page
-    );
-
-
-    if(target){
-        target.classList.add("active");
-    }
-
-
-    document.querySelectorAll(".nav-btn")
-    .forEach(btn=>{
-
-        btn.classList.remove("active");
-
-        if(btn.dataset.page===page){
-            btn.classList.add("active");
-        }
-
-    });
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
+// 🔊 VOICE ALERTS
+function speak(text) {
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.rate = 1;
+  speech.pitch = 1;
+  speechSynthesis.speak(speech);
 }
 
-
-
-/* =========================================
-   COUNTDOWN
-========================================= */
-
-
-const eclipseDate =
-new Date(
-"August 12, 2026 18:13:45"
-);
-
-
-function updateCountdown(){
-
-
-const now = new Date();
-
-
-let difference =
-eclipseDate - now;
-
-
-
-if(difference <=0){
-
-document.getElementById("countdown-status")
-.innerHTML="The eclipse has started!";
-
-return;
-
-}
-
-
-
-let days =
-Math.floor(
-difference/(1000*60*60*24)
-);
-
-
-let hours =
-Math.floor(
-(difference/(1000*60*60))%24
-);
-
-
-let mins =
-Math.floor(
-(difference/(1000*60))%60
-);
-
-
-let secs =
-Math.floor(
-(difference/1000)%60
-);
-
-
-
-document.getElementById("cd-days").textContent =
-days;
-
-
-document.getElementById("cd-hours").textContent =
-hours;
-
-
-document.getElementById("cd-mins").textContent =
-mins;
-
-
-document.getElementById("cd-secs").textContent =
-secs;
-
-
-}
-
-
-setInterval(
-updateCountdown,
-1000
-);
-
-
-updateCountdown();
-
-
-
-
-
-/* =========================================
-   DARK MODE
-========================================= */
-
-
-function toggleDarkMode(enabled){
-
-if(enabled){
-
-document.body.style.background =
-"radial-gradient(circle at top,#1b2750,#050505 60%)";
-
-}
-
-else{
-
-document.body.style.background =
-"#eeeeee";
-
-document.body.style.color =
-"#111";
-
-}
-
-}
-
-
-
-
-
-/* =========================================
-   ANIMATION TOGGLE
-========================================= */
-
-
-function toggleAnimations(enabled){
-
-
-if(enabled){
-
-document.body.style.setProperty(
-"--animations",
-"1"
-);
-
-}
-
-else{
-
-document.body.style.setProperty(
-"--animations",
-"0"
-);
-
-}
-
-}
-
-
-
-
-
-/* =========================================
-   LOCATION BUTTON
-========================================= */
-
-
-function requestLocation(){
-
-
-if(!navigator.geolocation){
-
-alert(
-"Location is not supported on this device."
-);
-
-return;
-
-}
-
-
-
-navigator.geolocation.getCurrentPosition(
-
-(position)=>{
-
-
-alert(
-"Location enabled successfully!"
-);
-
-
-},
-
-()=>{
-
-
-alert(
-"Unable to access location."
-);
-
-
-}
-
-
-);
-
-
-}
-
-
-
-
-
-/* =========================================
-   ECLIPSE SIMULATOR
-========================================= */
-
-
-const slider =
-document.getElementById(
-"eclipse-slider"
-);
-
-
-if(slider){
-
-
-slider.addEventListener(
-"input",
-()=>{
-
-
-let value =
-slider.value;
-
-
-
-let moon =
-document.getElementById(
-"sim-moon"
-);
-
-
-
-if(moon){
-
-moon.style.transform =
-`translateX(${value}px)`;
-
-}
-
-
-
-let label =
-document.getElementById(
-"sim-label"
-);
-
-
-
-if(label){
-
-
-if(value < 40){
-
-label.textContent =
-"Eclipse beginning";
-
-}
-
-else if(value < 70){
-
-label.textContent =
-"Greatest eclipse";
-
-}
-
-else{
-
-label.textContent =
-"Eclipse ending";
-
-}
-
-
-}
-
-
-}
-
-);
-
-}
-
-
-
-
-
-/* =========================================
-   SHOP BUTTON
-========================================= */
-
-
-function openShop(){
-
-navigateTo("shop");
-
-}
-
-
-
-
-
-/* =========================================
-   PWA INSTALL
-========================================= */
-
-
-let installPrompt;
-
-
-window.addEventListener(
-"beforeinstallprompt",
-(e)=>{
-
-e.preventDefault();
-
-installPrompt=e;
-
-
-const section =
-document.getElementById(
-"install-section"
-);
-
-
-if(section){
-
-section.classList.remove(
-"hidden"
-);
-
-}
-
-
-});
-
-
-
-function installPWA(){
-
-
-if(!installPrompt)
-return;
-
-
-
-installPrompt.prompt();
-
-
-
-installPrompt=null;
-
-
-}
-
-
-
-
-
-/* =========================================
-   START APP
-========================================= */
-
-
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-
-navigateTo("home");
-
-
-});
+// Example alerts
+setTimeout(() => speak("Put your glasses on in 10 seconds"), 5000);
+setTimeout(() => speak("Greatest eclipse approaching"), 15000);
+
+// 🌑 LOADER REMOVE
+window.onload = () => {
+  const loader = document.getElementById("loader");
+  if (loader) loader.style.display = "none";
+};
