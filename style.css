@@ -1,49 +1,78 @@
 body {
   margin: 0;
-  font-family: Arial;
-  background: #0b0b1a;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at center, #0b0b1a, #000);
   color: white;
   text-align: center;
 }
 
+/* NAVBAR */
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: #111;
-  padding: 15px;
+  padding: 15px 20px;
 }
 
 nav a {
-  margin: 10px;
-  color: cyan;
+  margin: 0 10px;
+  padding: 8px 14px;
+  background: #1a1a2e;
+  border-radius: 8px;
+  color: #00d9ff;
   text-decoration: none;
+  transition: 0.3s;
 }
 
-section {
-  margin-top: 40px;
+nav a:hover {
+  background: #00d9ff;
+  color: black;
 }
 
+/* BUTTON STYLE */
 .buy-btn {
   display: inline-block;
+  margin-top: 20px;
   padding: 15px 25px;
-  background: lime;
+  background: #00d9ff;
   color: black;
+  border-radius: 10px;
   text-decoration: none;
   font-weight: bold;
-  margin-top: 20px;
 }
 
-/* 🌑 Eclipse Loader */
+/* COUNTDOWN */
+#countdown, #start, #max, #end {
+  font-size: 2em;
+  margin: 15px;
+}
+
+/* LOADER (ECLIPSE ANIMATION) */
 .loader {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
+  margin: 40px auto;
   border-radius: 50%;
   background: black;
-  box-shadow: 0 0 30px orange;
-  margin: 20px auto;
-  animation: eclipse 2s infinite;
+  box-shadow: 0 0 30px #00d9ff inset;
+  position: relative;
+  overflow: hidden;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: #00d9ff;
+  border-radius: 50%;
+  left: -120px;
+  animation: eclipse 3s linear infinite;
 }
 
 @keyframes eclipse {
-  0% { box-shadow: 0 0 5px orange; }
-  50% { box-shadow: 0 0 40px yellow; }
-  100% { box-shadow: 0 0 5px orange; }
+  0% { left: -120px; }
+  50% { left: 0; }
+  100% { left: 120px; }
 }
