@@ -1,33 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Eclipse Tracker</title>
-<link rel="stylesheet" href="style.css">
+  <title>Test</title>
+  <style>
+    body {
+      background: black;
+      color: white;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    .btn {
+      background: cyan;
+      padding: 10px;
+      margin: 10px;
+      display: inline-block;
+      color: black;
+      text-decoration: none;
+    }
+
+    .loader {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: black;
+      box-shadow: 0 0 30px cyan inset;
+      margin: 20px auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loader::before {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: cyan;
+      border-radius: 50%;
+      left: -100px;
+      animation: move 2s linear infinite;
+    }
+
+    @keyframes move {
+      0% { left: -100px; }
+      100% { left: 100px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- Announcement Bar -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-870b2bb1-06e5-4e12-a4df-0c0c5cfca09a"></div>
+<h1>🌘 Eclipse Test</h1>
 
-<header>
-  <h1>🌘 Eclipse Tracker</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="guide-live.html">Live</a>
-    <a href="shop.html">Shop</a>
-  </nav>
-</header>
+<div class="loader"></div>
 
-<div class="loader" id="loader"></div>
+<div id="countdown"></div>
 
-<section>
-  <h2>Next Eclipse Countdown</h2>
-  <div id="countdown"></div>
-</section>
+<a class="btn" href="#">Home</a>
+<a class="btn" href="#">Live</a>
+<a class="btn" href="#">Shop</a>
 
-<script src="script.js"></script>
+<script>
+  const target = new Date("Aug 12, 2026 10:30:00").getTime();
+
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = target - now;
+
+    const s = Math.floor(diff / 1000);
+    document.getElementById("countdown").innerHTML = s + " seconds";
+  }, 1000);
+</script>
+
 </body>
 </html>
